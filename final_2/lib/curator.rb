@@ -21,4 +21,30 @@ class Curator
   def find_photo_by_id(id)
     @artists.find { |x| x.id == id }
   end
+
+  def find_photographs_by_artist(artist)
+    @photographs.inject([]) do |acc, photo|
+      if photo.artist_id == artist.id
+        acc << photo
+      end
+      acc
+    end
+  end
+
+  def artists_with_multiple_photographs
+    @artists.each_with_object([]) do |artist, arr|
+      if find_photographs_by_artist(artist).length > 1
+        arr << artist
+      end
+    end
+  end
+
+  def photographs_taken_by_artist_from(country)
+    @artists.inject([]) do |acc, x|
+      if x.country == country
+        acc << x
+      end
+      acc
+    end
+  end
 end
