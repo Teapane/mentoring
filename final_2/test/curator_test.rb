@@ -74,13 +74,13 @@ class CuratorTest < Minitest::Test
   def test_it_finds_a_photo
     @curator.add_photograph(@photo)
     @curator.add_photograph(@photo2)
-    assert_equal @photo, @curator.find_artist_by_id(@photo.id)
+    assert_equal @photo, @curator.find_photo_by_id(@photo.id)
   end
 
   def test_it_finds_an_artist
     @curator.add_artist(@artist)
     @curator.add_artist(@artist2)
-    assert_equal @artist, @curator.find_photo_by_id(@artist.id)
+    assert_equal @artist, @curator.find_artist_by_id(@artist.id)
   end
 
   def test_it_finds_photographs_by_artist
@@ -129,5 +129,22 @@ class CuratorTest < Minitest::Test
     data = @curator.load_artists(file)
     assert_equal 6, data.length
     assert_equal 6, @curator.artists.length
+  end
+
+  def test_it_finds_ranges
+    @curator.add_photograph(@photo)
+    @curator.add_photograph(@photo2)
+    @curator.add_photograph(@photo3)
+    assert_equal [@photo2, @photo3], @curator.photographs_taken_between(1984..1986)
+  end
+
+  def test_it_finds_photographs_by_age
+    @curator.add_artist(@artist)
+    @curator.add_photograph(@photo)
+    @curator.add_photograph(@photo2)
+    @curator.add_photograph(@photo3)
+    artist = @curator.find_artist_by_id("2")
+    expected = {84 => "Starry Night"}
+    assert_equal expected, @curator.artists_photographs_by_age(artist)
   end
 end

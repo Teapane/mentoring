@@ -16,35 +16,29 @@ class Curator
   end
 
   def find_artist_by_id(id)
-    @photographs.find { |x| x.id == id }
+    @artists.find { |x| x.id == id }
   end
 
   def find_photo_by_id(id)
-    @artists.find { |x| x.id == id }
+    @photographs.find { |x| x.id == id }
   end
 
   def find_photographs_by_artist(artist)
     @photographs.inject([]) do |acc, photo|
-      if photo.artist_id == artist.id
-        acc << photo
-      end
+      acc << photo if photo.artist_id == artist.id
       acc
     end
   end
 
   def artists_with_multiple_photographs
     @artists.each_with_object([]) do |artist, arr|
-      if find_photographs_by_artist(artist).length > 1
-        arr << artist
-      end
+      arr << artist unless find_photographs_by_artist(artist).length < 1
     end
   end
 
   def photographs_taken_by_artist_from(country)
     @artists.inject([]) do |acc, x|
-      if x.country == country
-        acc << x
-      end
+      acc << x unless x.country != country
       acc
     end
   end
@@ -61,5 +55,27 @@ class Curator
   def load_artists(file)
     data = load_data(file)
     data.each { |x| add_artist(x) }
+  end
+
+  def photographs_taken_between(range)
+    @photographs.reduce([]) do |acc, x|
+      acc << x if in_range(range, x)
+      acc
+    end
+  end
+
+  def in_range(range, photo)
+    range.include?(photo.year.to_i)
+  end
+
+  def artists_photographs_by_age(artist)
+    find_photographs_by_artist(artist).inject({}) do |hash, x|
+      hash[published_age(x, artist)] = x.name
+      hash
+    end
+  end
+
+  def published_age(photo, artist)
+    (photo.year.to_i - artist.born.to_i)
   end
 end
