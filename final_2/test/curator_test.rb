@@ -107,4 +107,27 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo3)
     assert_equal [@artist], @curator.photographs_taken_by_artist_from(@artist.country)
   end
+
+  def test_photographs_taken_by_artist_from_returns_nil
+    @curator.add_artist(@artist)
+    @curator.add_artist(@artist2)
+    @curator.add_photograph(@photo)
+    @curator.add_photograph(@photo2)
+    @curator.add_photograph(@photo3)
+    assert_equal [], @curator.photographs_taken_by_artist_from("Hungary")
+  end
+
+  def test_it_loads_photos_csv
+    file = './data/photographs.csv'
+    data = @curator.load_photographs(file)
+    assert_equal 4, data.length
+    assert_equal 4, @curator.photographs.length
+  end
+
+  def test_it_loads_artists_csv
+    file = './data/artists.csv'
+    data = @curator.load_artists(file)
+    assert_equal 6, data.length
+    assert_equal 6, @curator.artists.length
+  end
 end

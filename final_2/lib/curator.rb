@@ -1,3 +1,4 @@
+require 'csv'
 class Curator
   attr_reader :photographs, :artists
 
@@ -46,5 +47,19 @@ class Curator
       end
       acc
     end
+  end
+
+  def load_data(file)
+    CSV.open(file, headers: :first_row).map(&:to_h)
+  end
+
+  def load_photographs(file)
+    data = load_data(file)
+    data.each { |x| add_photograph(x) }
+  end
+
+  def load_artists(file)
+    data = load_data(file)
+    data.each { |x| add_artist(x) }
   end
 end
