@@ -7,7 +7,7 @@ class NodeTest < Minitest::Test
   def test_it_sets_the_values
     node = Node.new("Burke")
     assert_equal "Burke", node.surname
-    assert_nil nil, node.next_node
+    assert_nil(node.next_node)
   end
 
   def test_it_sets_non_nil_values
