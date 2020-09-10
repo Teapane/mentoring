@@ -4,6 +4,7 @@ require 'minitest/pride'
 require './lib/guests'
 
 class GuestTest < Minitest::Test
+  #notice here the data type of our attributes and also notice the differing data types of our values
   def setup
     attrs = {
       name: "Smith Family",
@@ -19,7 +20,7 @@ class GuestTest < Minitest::Test
   end
 
   def test_it_sets_the_guest_count
-    assert_equal ["none"], @guests.allergies
+    assert_equal 4, @guests.count
   end
 
   def test_it_sets_the_guests_allergies

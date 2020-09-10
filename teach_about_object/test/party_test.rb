@@ -47,9 +47,9 @@ class PartyTest < Minitest::Test
     assert_equal [@guests], guests
   end
 
-  def test_the_guest_count
-    guests = @party.add_guests(@guests)
-    assert_equal 4, guests.count
+  def test_the_guests_name
+    @party.add_guests(@guests)
+    assert_equal "Smith Family", @party.find_guests_by_name("Smith Family")
   end
 end
 
