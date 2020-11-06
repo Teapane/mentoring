@@ -30,7 +30,6 @@ class RomanTest < MiniTest::Test
   end
 
   def test_2
-
     assert_equal 'II', klass.to_roman(2)
   end
 
