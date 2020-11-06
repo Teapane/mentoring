@@ -25,6 +25,7 @@ How convenient! If we look at the docs, it's literally in the defintion that it 
 
   The optional level argument determines the level of recursion to flatten.
 ```
+
 And the C source shows this as well:
 ```c
 static VALUE
@@ -43,4 +44,25 @@ rb_ary_flatten(int argc, VALUE *argv, VALUE ary)
   return result;
 }
 ```
-Don't worry if you don't know C, its just to illustrate that it is in fact recursive. So, let's create our own `Flatten` method in Ruby, without using the enumerable to understand recursion better.
+Don't worry if you don't know C, its just to illustrate that it is in fact recursive. So, let's create our own `Flatten` method in Ruby, without using the enumerable to understand recursion better. Let's also make our `Flattener` a little fancier, and have it reject nils as well:
+
+When done, our Flattener should operate in the same way that `flatten` and `compact` work:
+```rb
+# irb
+irb(main):001:0> a = [1, 2, 3, [nil, 5, 6], [nil, nil, 7, 8]]
+irb(main):002:0> a.flatten.compact
+=> [1, 2, 3, 5, 6, 7, 8]
+irb(main):003:0> require './flattener'
+=> true
+irb(main):004:0> Flattener.flatten(a)
+=> [1, 2, 3, 5, 6, 7, 8]
+```
+Also of note: `Flatten` takes an optional `depth` argument, so we can tell it how deeply we want it to flatten.
+```rb
+irb(main):008:0> a = [ 1, 2, [3, [4, 5]]]
+irb(main):009:0> a.flatten(1)
+=> [1, 2, 3, [4, 5]]
+irb(main):010:0> a.flatten(2)
+=> [1, 2, 3, 4, 5]
+```
+We can ignore this for now.
