@@ -58,7 +58,7 @@ irb(main):004:0> Flattener.flatten(a)
 => [1, 2, 3, 5, 6, 7, 8]
 ```
 Here are some tests to get you going:
-```
+```rb
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'flattener'
