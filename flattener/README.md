@@ -1,4 +1,4 @@
-# Welcome to Recursion Again
+# Welcome to Recursion Again (RUBY)
 ![](https://media.giphy.com/media/3GuP496Wrkos8/giphy.gif)
 
 # Understanding Recursion
@@ -118,3 +118,41 @@ irb(main):010:0> a.flatten(2)
 => [1, 2, 3, 4, 5]
 ```
 We can ignore this for now.
+
+
+
+
+
+# Welcome to Recursion Again (JavaScript)
+
+# Understanding Recursion
+- Recursion is an interesting subject and can be confusing when you first think about it. A method calling itself? In this economy? Recursion also comes with its pitfalls,
+`STACK LEVEL TOO DEEP` anyone? However, it can be a valuable tool in your programming toolbox so let's dive in and try to make sense of it.
+
+# JavaScript `Array.protoype.flat()`
+
+In JavaScript, we can `flatten` arrays, or in other words, make multi-dimensional arrays one dimensional. For Example:
+```node
+$ node
+> arr1
+[ 0, 1, 2, [ 3, 4 ] ]
+> arr1.flat()
+[ 0, 1, 2, 3, 4 ]
+```
+How convenient! If we look at the docs, it's literally in the defintion that it is indeed recursive!
+```
+  The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+```
+
+So, let's create our own `flat()` function in JS, without using the builtin to understand recursion better.
+
+When done, our `flattener()` should operate in the same way that `flat()` works:
+```node
+> arr1
+  [ 0, 1, 2, [ 3, 4 ] ]
+> flatten(arr1)
+  [ 0, 1, 2, 3, 4 ]
+> arr1.flat()
+  [ 0, 1, 2, 3, 4 ]
+```
+Here are some tests to get you going:
