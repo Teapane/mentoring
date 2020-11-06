@@ -2,7 +2,7 @@ class Flattener
   class << self
     #recursive
     def flatten(arr)
-      return "I shant flatten anything other than an array" if !arr.is_a?(Array)
+      return "I shant flatten anything other than an array" if !array?(arr)
       non_nil = arr.reject { |x| x.nil? }
       non_nil.reduce([]) do |acc, item|
         if array?(item)
