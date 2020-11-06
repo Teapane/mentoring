@@ -57,6 +57,58 @@ irb(main):003:0> require './flattener'
 irb(main):004:0> Flattener.flatten(a)
 => [1, 2, 3, 5, 6, 7, 8]
 ```
+Here are some tests to get you going:
+```
+require 'minitest/autorun'
+require 'minitest/pride'
+require_relative 'flattener'
+
+class FlattenerTest < MiniTest::Unit::TestCase
+  def klass
+    Flattener
+  end
+
+  def test_it_ignores_non_arrays
+    non_arr = "Hi, I am not an array"
+    non_arr_2 = {foo: "bar"}
+    non_arr_3 = 179
+    assert_equal "I shant flatten anything other than an array", Flattener.flatten(non_arr)
+    assert_equal "I shant flatten anything other than an array", Flattener.flatten(non_arr_2)
+    assert_equal "I shant flatten anything other than an array", Flattener.flatten(non_arr_3)
+  end
+
+  def test_empty_array
+    skip
+    arr = []
+    new = []
+    assert_equal new, Flattener.flatten(arr)
+  end
+
+  def test_simple_array
+    skip
+    arr = [1,2,[3]]
+    new = [1, 2, 3]
+    assert_equal new, Flattener.flatten(arr)
+  end
+
+  def test_it_rejects_nils
+    skip
+    arr = [1, 2, [nil, nil], [5, 6, nil]]
+    new = [1, 2, 5, 6]
+    assert_equal new, Flattener.flatten(arr)
+  end
+
+  def test_all_values_in_nested_list_are_nil
+    skip
+    arr = [nil, [[[nil]]], nil, nil, [[nil, nil], nil], nil]
+    flat_array = Flattener.flatten(arr)
+    assert_equal [], flat_array
+  end
+end
+
+
+```
+
 Also of note: `Flatten` takes an optional `depth` argument, so we can tell it how deeply we want it to flatten.
 ```rb
 irb(main):008:0> a = [ 1, 2, [3, [4, 5]]]
