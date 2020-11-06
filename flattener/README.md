@@ -27,7 +27,7 @@ How convenient! If we look at the docs, it's literally in the defintion that it 
 ```
 And the C source shows this as well:
 ```c
-  static VALUE
+static VALUE
 rb_ary_flatten(int argc, VALUE *argv, VALUE ary)
 {
   int mod = 0, level = -1;
@@ -43,3 +43,4 @@ rb_ary_flatten(int argc, VALUE *argv, VALUE ary)
   return result;
 }
 ```
+Don't worry if you don't know C, its just to illustrate that it is in fact recursive. So, let's create our own `Flatten` method in Ruby, without using the enumerable to understand recursion better.
