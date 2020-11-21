@@ -14,6 +14,11 @@ class MealsTest < Minitest::Test
 
   end
 
+  def test_it_creates_an_instance
+    meal = Meals.new({})
+    assert_instance_of Meals, meal
+  end
+
   def test_it_sets_the_appetizers
     assert_equal ["oysters", "caviar"], @meals.appetizers
   end

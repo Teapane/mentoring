@@ -1,7 +1,8 @@
-require 'pry'
 class Party
-  attr_reader :meals, :guests
-  def initialize
+  attr_reader :guests, :meals
+
+  def initialize(args={}) wq
+
     @guests = []
     @meals = []
   end
@@ -15,9 +16,7 @@ class Party
   end
 
   def find_guests_by_name(name)
-    guests = @guests.find do |x|
-      x.name == name
-    end
-    guests.name
+    family = @guests.find { |x| x.name == name }
+    family.name
   end
 end

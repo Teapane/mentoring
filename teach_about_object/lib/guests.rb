@@ -1,4 +1,5 @@
 class Guests
+
   attr_reader :name, :count, :allergies
 
   def initialize(attrs)

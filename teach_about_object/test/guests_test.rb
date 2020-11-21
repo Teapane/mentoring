@@ -15,6 +15,10 @@ class GuestTest < Minitest::Test
     @guests = Guests.new(attrs)
   end
 
+  def test_it_creates_an_instance
+    assert_instance_of Guests, @guests
+  end
+
   def test_it_sets_the_name
     assert_equal "Smith Family", @guests.name
   end
