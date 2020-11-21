@@ -1,8 +1,7 @@
 class Party
   attr_reader :guests, :meals
 
-  def initialize(args={}) wq
-
+  def initialize(args={})
     @guests = []
     @meals = []
   end
