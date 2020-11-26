@@ -1,6 +1,4 @@
 # Let's take a look an example of a Proc:
-#
-#
 square = Proc.new {|x| x**2 }
 
 # We define a new Proc, that will square a number. We can then call it a few ways:
@@ -9,7 +7,7 @@ result = square.call(3)  # => 9
 result_two = square.(3)  # => 9
 result_three = square[3] # => 9
 
-# WE can think of Procs as _closures_, so they can remember & use context: For example:
+# We can think of Procs as _closures_, so they can remember & use context: For example:
 
 def proc_factor(factor)
   Proc.new { |x| x * factor }
@@ -62,3 +60,11 @@ lambda2 = ->(x) { x**2 }
 # => 25
 # irb(main):025:0> lambda2[5]
 # => 25
+#
+def lambda_printer(&block)
+  block
+end
+
+lambda_printer = lambda_printer { |x| puts "#{x} called this many times" }
+
+lambda_printer.call(5)
