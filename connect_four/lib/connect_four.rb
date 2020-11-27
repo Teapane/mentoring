@@ -11,16 +11,21 @@ class ConnectFour
   class << self
 
     def winner(board)
-      check_row(board)
+      check_row(board) || check_column(board)
     end
 
     private
+
+    def check_column(column)
+      check_row(column.transpose)
+    end
 
     def check_row(board)
       board.each do |row|
         return find_row_winner(row).first unless find_row_winner(row).nil?
       end
     end
+
 
     def find_row_winner(row)
       row.each_cons(4).find do |color|
