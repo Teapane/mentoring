@@ -1,0 +1,51 @@
+collatz conjecutre
+
+#input, Integer:Int
+# return, Integer:Int
+# edge cases negatives, non-ints
+# when will we stack overflow, ruby has its limits (ulimit when it compiles to c)
+def tally(integer)
+  # catch all errors immediately so we don't execute if passed the wrong type
+  return "Argument Error, #{integer} must be of type:INT and non negative" if (integer < 0 || !number.is_a?(Integer)
+  # lets keep a tally of each iteration we take over the loop
+  # we can use recursion here
+  steps = 0
+  while integer > 1
+    # determine if the number is even or odd
+    # if event, divide the number by 2
+    # if number is odd, multiply it by 3 and add one
+    # repeat the loop until we reach one
+    number = integer % 2 == 0 ? number/2  : (number * 3 + 1)
+
+   # increment our counter for each iteration of the loop
+   steps += 1
+  end
+  # return the number of steps it took to reach 1
+  steps
+end
+
+tally(10)
+tally(100)
+tally(1000)
+
+
+Coding: Write a function that takes a string (S) and a frequency (N) as inputs, and returns a string with all N consecutive repeats of a character removed. Examples:
+f("asssd", 3) =>  "ad"
+f("asssaad", 3) -> "d" ("asssaad" => "aaad" => "d"
+
+# string:String
+# frequency:Int
+# can frequency ever be negative?
+# can string be empty?
+# how do we handle casing?
+# what about special chars?
+# do we need to worry about empty/spaces or is the string always consectutive?
+def letter_frequency(string, frequency)
+   return "Argument Error #{string, frequency} do not match criteria!" if string.empty? || frequency < 0
+   # sanitze the string of spaces
+   characters = string.gsub!(/\W+/, '')
+   character_count_hash_map = characters.each_char.with_object(Hash.new(0)) do |letter, freq|
+     freq[letter] += 1
+   end
+   character_count_hash_map.select { |key, value| value > frequency }.keys.join("")
+end

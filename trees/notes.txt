@@ -1,0 +1,15 @@
+// Implement the Garage class. Others should be able to use that class like this:
+
+Garage g = new Garage();
+// There are 50 spots in the garage for cars, and the rate is 0.5 per hour.
+g.Initialize("car", 50, 0.5);
+// There are 20 spots in the garage for motorcycles, and the rate is 0.25 per hour.
+g.Initialize("motorcycle", 20, 0.25);
+
+
+// Two hours pass.
+
+float cost = g.GetCost("4VAE845");  // cost = $0.50/hour * 2 hours = $1.00
+// The car with license plate 4VAE845 leaves the garage.
+g.OnExit("4VAE845");
+spots = g.GetAvailableSpots("car"); // spots = 50 again.

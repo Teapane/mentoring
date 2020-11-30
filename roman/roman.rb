@@ -40,4 +40,9 @@ class Roman
       result
     end
   end
+
+  def frequency_remover(string, frequency)
+    string.chars.map do |letter|
+      [letter. q
+  end
 end
